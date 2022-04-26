@@ -29,15 +29,10 @@ static void	sendbits(int pid, char c)
 	while (i < 8)
 	{
 		if (c % 2 == 0)
-		{
 			kill(pid, SIGUSR1);
-			usleep(100);
-		}
 		else
-		{
 			kill(pid, SIGUSR2);
-			usleep(100);
-		}
+		usleep(100);
 		c = c >> 1;
 		i++;
 	}
