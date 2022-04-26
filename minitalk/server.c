@@ -29,12 +29,8 @@ static void	handler(int sig, siginfo_t *info, void *useless)
 	if (i == 8)
 	{
 		if (character == '\0')
-		{
-			write(1, "\n", 1);
 			kill(info->si_pid, SIGUSR1);
-		}
-		else
-			write(1, &character, 1);
+		write(1, &character, 1);
 		i = 0;
 		character = 0;
 	}
