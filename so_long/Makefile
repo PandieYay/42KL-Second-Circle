@@ -5,8 +5,8 @@ FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): main.c Libft/*.c ${SRCS}
-	gcc ${FLAGS} -o so_long main.c Libft/*.c -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+$(NAME): *.c Libft/*.c ${SRCS}
+	gcc ${FLAGS} -o so_long *.c Libft/*.c -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
 clean:
 	rm -f ${OBJS}
