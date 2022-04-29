@@ -1,12 +1,12 @@
 NAME = so_long
-SRCS = Libft/ft_putnbr.c
+SRCS = *.c Libft/*.c
 OBJS = ${SRCS:.c=.o}
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): *.c Libft/*.c ${SRCS}
-	gcc ${FLAGS} -o so_long *.c Libft/*.c -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+$(NAME): ${SRCS}
+	gcc ${FLAGS} -o so_long ${SRCS} -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
 clean:
 	rm -f ${OBJS}

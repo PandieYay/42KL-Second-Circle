@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edlim <edlim@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/29 13:27:56 by edlim             #+#    #+#             */
+/*   Updated: 2022/04/29 13:27:57 by edlim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include <stdio.h>
 
@@ -16,61 +28,82 @@ static int	firstline(int fd)
 			return (-1);
 		wallc++;
 	}
+	free(line);
 	return (wallc);
+}
+
+static t_map	checkcomponents(char *line, int i, t_map list)
+{
+	if (line[i] == '1')
+		list.wallc++;
+	if (line[i] == 'E')
+		list.e++;
+	if (line[i] == 'C')
+		list.c++;
+	if (line[i] == 'P')
+		list.p++;
+	return (list);
+}
+
+static t_map	intializevariables(void)
+{
+	t_map	list;
+
+	list.e = 0;
+	list.c = 0;
+	list.p = 0;
+	list.x = 0;
+	list.wallc = 0;
+	list.lastwall = 0;
+	list.returnnum = 0;
+	return (list);
+}
+
+static t_map	checklines(char *line, int fd, t_map list)
+{
+	int	i;
+
+	while (line != NULL)
+	{
+		if (line[0] != '1')
+			list.returnnum = -1;
+		i = 1;
+		list.wallc = 1;
+		while (line[i] != '\n' && line[i] != '\0')
+		{
+			list = checkcomponents(line, i, list);
+			if (line[i + 1] == '\n' || line[1 + 1] == '\0')
+				if (line[i] != '1')
+					list.returnnum = -1;
+			i++;
+		}
+		if (i != list.x)
+			list.returnnum = -1;
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (list);
 }
 
 int	checkmap(char *map)
 {
 	char	*line;
 	int		fd;
-	int		i;
-	int		x;
-	int		E;
-	int		C;
-	int		P;
-	int		wallc;
-	int		lastwall;
+	t_map	list;
 
+	list = intializevariables();
 	fd = open(map, O_RDONLY);
-	x = firstline(fd);
-	if (x == -1)
+	list.x = firstline(fd);
+	if (list.x == -1)
 		return (-1);
 	line = get_next_line(fd);
-	E = 0;
-	C = 0;
-	P = 0;
-	while (line != NULL)
-	{
-		lastwall = 0;
-		i = 0;
-		if (line[i] != '1')
-			return (-1);
-		i++;
-		wallc = 1;
-		while (line[i] != '\n' && line[i] != '\0')
-		{
-			if (line[i] == '1')
-				wallc++;
-			if (line[i] == 'E')
-				E++;
-			if (line[i] == 'C')
-				C++;
-			if (line[i] == 'P')
-				P++;
-			if (line[i + 1] == '\n' || line[1 + 1] == '\0')
-			{
-				if (line[i] != '1')
-					return (-1);
-			}
-			i++;
-		}
-		if (i != x)
-			return (-1);
-		if (wallc == x)
-			lastwall = 1;
-		line = get_next_line(fd);
-	}
-	if (lastwall != 1 || E < 1 || C < 1 || P < 1)
+	list = checklines(line, fd, list);
+	if (list.returnnum == -1)
 		return (-1);
+	if (list.wallc == list.x)
+		list.lastwall = 1;
+	if (list.lastwall != 1 || list.e < 1 || list.c < 1 || list.p < 1)
+		return (-1);
+	close(fd);
 	return (0);
 }
