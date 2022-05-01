@@ -32,10 +32,15 @@ typedef struct s_map {
 	int	returnnum;
 }	t_map;
 
+typedef struct s_mapsize {
+	int	x;
+	int	y;
+}	t_mapsize;
+
 void	ft_putnbr(int n);
 void	ft_putstr(char *s);
 char	*get_next_line(int fd);
 int		checkmap(char *map);
-t_ptrs	generatemap(void);
+t_ptrs	generatemap(char *map);
 
 #endif

@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 		ft_putstr("Error\nIncorrect Map");
 		return (-1);
 	}
-	param = generatemap();
+	param = generatemap(argv[1]);
 	mlx_key_hook(param.win, key_hook, &param);
 	mlx_hook(param.win, 17, 0, &closewindow, &param);
 	mlx_loop(param.mlx);

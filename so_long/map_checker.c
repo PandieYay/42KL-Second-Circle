@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 static int	firstline(int fd)
 {

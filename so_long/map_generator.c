@@ -13,20 +13,77 @@
 #include "mlx.h"
 #include "so_long.h"
 
-t_ptrs	generatemap(void)
+static t_mapsize	getmapsize(char *map)
 {
-	t_ptrs	param;
-	void	*img;
-	char	*path;
-	int		img_width;
-	int		img_height;
+	t_mapsize	mapsize;
+	char		*line;
+	int			fd;
 
-	path = "sprites/64.xpm";
+	mapsize.x = 0;
+	mapsize.y = 0;
+	fd = open(map, O_RDONLY);
+	line = get_next_line(fd);
+	while (line[mapsize.x] != '\n')
+		mapsize.x++;
+	mapsize.y++;
+	free(line);
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		mapsize.y++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (mapsize);
+}
+
+static void	initializexpm(t_ptrs param, t_mapsize mapsize, char *path)
+{
+	void	*img;
+	int		img_w;
+	int		img_h;
+
+	img = mlx_xpm_file_to_image(param.mlx, path, &img_w, &img_h);
+	mlx_put_image_to_window(param.mlx, param.win, img,
+		mapsize.x * 64, mapsize.y * 64);
+}
+
+static void	initializemap(t_ptrs param, t_mapsize mapsize, char *map)
+{
+	char	*line;
+	char	*temp;
+	int		fd;
+
+	fd = open(map, O_RDONLY);
+	line = get_next_line(fd);
+	mapsize.y = 0;
+	while (line != NULL)
+	{
+		mapsize.x = 0;
+		temp = line;
+		while (line[mapsize.x] != '\n' && line[mapsize.x] != '\0')
+		{
+			if (line[mapsize.x] == '1')
+				initializexpm(param, mapsize, "sprites/64.xpm");
+			mapsize.x++;
+		}
+		mapsize.y++;
+		free(temp);
+		line = get_next_line(fd);
+	}
+	close(fd);
+}
+
+t_ptrs	generatemap(char *map)
+{
+	t_ptrs		param;
+	t_mapsize	mapsize;
+
+	mapsize = getmapsize(map);
 	param.mlx = mlx_init();
-	param.win = mlx_new_window(param.mlx, 384, 192, "mlx 42");
-	mlx_pixel_put(param.mlx, param.win, 250, 250, 0xFFFFFF);
-	img = mlx_xpm_file_to_image(param.mlx, path, &img_width, &img_height);
-	mlx_put_image_to_window (param.mlx, param.win, img, 0, 0);
-	mlx_put_image_to_window (param.mlx, param.win, img, 320, 0);
+	param.win = mlx_new_window(param.mlx, mapsize.x * 64,
+			mapsize.y * 64, "./so_long");
+	initializemap(param, mapsize, map);
 	return (param);
 }
