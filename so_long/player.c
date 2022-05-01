@@ -12,6 +12,33 @@
 
 #include "so_long.h"
 
+t_ptrs	getplayercords(t_ptrs param, char *map)
+{
+	char	*line;
+	char	*temp;
+	int		fd;
+
+	fd = open(map, O_RDONLY);
+	line = get_next_line(fd);
+	param.y = 0;
+	while (line != NULL)
+	{
+		param.x = 0;
+		temp = line;
+		while (line[param.x] != '\n' && line[param.x] != '\0')
+		{
+			if (line[param.x] == 'P')
+				return (param);
+			param.x++;
+		}
+		param.y++;
+		free(temp);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (param);
+}
+
 static int	closewindow(t_ptrs *param)
 {
 	mlx_destroy_window(param->mlx, param->win);

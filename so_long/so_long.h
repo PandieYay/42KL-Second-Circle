@@ -21,6 +21,8 @@
 typedef struct s_ptrs {
 	void	*mlx;
 	void	*win;
+	int		x;
+	int		y;
 }	t_ptrs;
 
 typedef struct s_map {
@@ -44,5 +46,6 @@ char	*get_next_line(int fd);
 int		player(int key, t_ptrs *param);
 int		checkmap(char *map);
 t_ptrs	generatemap(char *map);
+t_ptrs	getplayercords(t_ptrs param, char *map);
 
 #endif

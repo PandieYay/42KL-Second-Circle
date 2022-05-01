@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	param = generatemap(argv[1]);
+	param = getplayercords(param, argv[1]);
 	mlx_hook(param.win, 2, 0, &player, &param);
 	mlx_hook(param.win, 17, 0, &closewindow, &param);
 	mlx_loop(param.mlx);
