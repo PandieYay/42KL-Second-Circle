@@ -38,15 +38,30 @@ static t_mapsize	getmapsize(char *map)
 	return (mapsize);
 }
 
-static void	initializexpm(t_ptrs param, t_mapsize mapsize, char *path)
+static void	checkcomponents(char *line, t_mapsize mapsize, t_ptrs param)
 {
 	void	*img;
+	char	*path;
 	int		img_w;
 	int		img_h;
 
-	img = mlx_xpm_file_to_image(param.mlx, path, &img_w, &img_h);
-	mlx_put_image_to_window(param.mlx, param.win, img,
-		mapsize.x * 64, mapsize.y * 64);
+	path = NULL;
+	if (line[mapsize.x] == '1')
+		path = "sprites/wall.xpm";
+	if (line[mapsize.x] == 'E')
+		path = "sprites/exit.xpm";
+	if (line[mapsize.x] == 'C')
+		path = "sprites/coin.xpm";
+	if (line[mapsize.x] == 'P')
+		path = "sprites/player.xpm";
+	if (line[mapsize.x] == '0')
+		path = NULL;
+	if (path != NULL)
+	{
+		img = mlx_xpm_file_to_image(param.mlx, path, &img_w, &img_h);
+		mlx_put_image_to_window(param.mlx, param.win, img,
+			mapsize.x * 64, mapsize.y * 64);
+	}
 }
 
 static void	initializemap(t_ptrs param, t_mapsize mapsize, char *map)
@@ -64,8 +79,7 @@ static void	initializemap(t_ptrs param, t_mapsize mapsize, char *map)
 		temp = line;
 		while (line[mapsize.x] != '\n' && line[mapsize.x] != '\0')
 		{
-			if (line[mapsize.x] == '1')
-				initializexpm(param, mapsize, "sprites/64.xpm");
+			checkcomponents(line, mapsize, param);
 			mapsize.x++;
 		}
 		mapsize.y++;
