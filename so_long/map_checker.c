@@ -101,7 +101,7 @@ int	checkmap(char *map)
 		return (-1);
 	if (list.wallc == list.x)
 		list.lastwall = 1;
-	if (list.lastwall != 1 || list.e < 1 || list.c < 1 || list.p < 1)
+	if (list.lastwall != 1 || list.e < 1 || list.c < 1 || list.p != 1)
 		return (-1);
 	close(fd);
 	return (0);

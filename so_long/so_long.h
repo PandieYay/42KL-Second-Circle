@@ -13,6 +13,7 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -40,6 +41,7 @@ typedef struct s_mapsize {
 void	ft_putnbr(int n);
 void	ft_putstr(char *s);
 char	*get_next_line(int fd);
+int		player(int key, t_ptrs *param);
 int		checkmap(char *map);
 t_ptrs	generatemap(char *map);
 
