@@ -17,6 +17,7 @@ int	closewindow(t_ptrs *param)
 	int	i;
 
 	i = -1;
+	destory_images(*param);
 	mlx_destroy_window(param->mlx, param->win);
 	while (param->map[++i] != NULL)
 		free(param->map[i]);
@@ -27,9 +28,7 @@ int	closewindow(t_ptrs *param)
 int	main(int argc, char **argv)
 {
 	t_ptrs	param;
-	char	*path;
 
-	path = "sprites/64.xpm";
 	if (argc != 2)
 		return (-1);
 	if (checkmap(argv[1]) == -1)

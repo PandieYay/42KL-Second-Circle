@@ -40,27 +40,32 @@ static t_mapsize	getmapsize(char *map)
 static void	checkcomponents(char *line, t_mapsize mapsize, t_ptrs param)
 {
 	void	*img;
-	char	*path;
-	int		img_w;
-	int		img_h;
 
-	path = NULL;
 	if (line[mapsize.x] == '1')
-		path = "sprites/wall.xpm";
+		img = param.wall;
 	if (line[mapsize.x] == 'E')
-		path = "sprites/exit.xpm";
+		img = param.exit;
 	if (line[mapsize.x] == 'C')
-		path = "sprites/coin.xpm";
+		img = param.coin;
 	if (line[mapsize.x] == 'P')
-		path = "sprites/player.xpm";
+		img = param.player;
 	if (line[mapsize.x] == '0')
-		path = NULL;
-	if (path != NULL)
+		img = NULL;
+	if (img != NULL)
 	{
-		img = mlx_xpm_file_to_image(param.mlx, path, &img_w, &img_h);
 		mlx_put_image_to_window(param.mlx, param.win, img,
 			mapsize.x * 64, mapsize.y * 64);
 	}
+}
+
+static t_ptrs	initializeimages(t_ptrs param)
+{
+	param.player = point_image("sprites/player.xpm", param);
+	param.coin = point_image("sprites/coin.xpm", param);
+	param.wall = point_image("sprites/wall.xpm", param);
+	param.exit = point_image("sprites/exit.xpm", param);
+	param.empty = point_image("sprites/empty.xpm", param);
+	return (param);
 }
 
 static void	initializemap(t_ptrs param, t_mapsize mapsize, char *map)
@@ -104,6 +109,7 @@ t_ptrs	generatemap(char *map)
 	while (++i < mapsize.x)
 		param.map[i] = malloc(sizeof(char) * mapsize.y);
 	param.map[mapsize.x] = NULL;
+	param = initializeimages(param);
 	initializemap(param, mapsize, map);
 	return (param);
 }

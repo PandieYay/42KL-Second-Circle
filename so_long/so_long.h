@@ -24,6 +24,12 @@ typedef struct s_ptrs {
 	int		x;
 	int		y;
 	char	**map;
+	void	*player;
+	void	*coin;
+	void	*wall;
+	void	*exit;
+	void	*empty;
+
 }	t_ptrs;
 
 typedef struct s_map {
@@ -43,6 +49,8 @@ typedef struct s_mapsize {
 
 void	ft_putnbr(int n);
 void	ft_putstr(char *s);
+void	*point_image(char *path, t_ptrs param);
+void	destory_images(t_ptrs param);
 char	*get_next_line(int fd);
 int		player(int key, t_ptrs *param);
 int		checkmap(char *map);
