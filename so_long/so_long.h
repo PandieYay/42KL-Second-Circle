@@ -23,6 +23,7 @@ typedef struct s_ptrs {
 	void	*win;
 	int		x;
 	int		y;
+	char	**map;
 }	t_ptrs;
 
 typedef struct s_map {
@@ -45,6 +46,7 @@ void	ft_putstr(char *s);
 char	*get_next_line(int fd);
 int		player(int key, t_ptrs *param);
 int		checkmap(char *map);
+int		closewindow(t_ptrs *param);
 t_ptrs	generatemap(char *map);
 t_ptrs	getplayercords(t_ptrs param, char *map);
 

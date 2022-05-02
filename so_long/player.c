@@ -20,7 +20,6 @@ t_ptrs	getplayercords(t_ptrs param, char *map)
 
 	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
-	param.y = 0;
 	while (line != NULL)
 	{
 		param.x = 0;
@@ -28,7 +27,10 @@ t_ptrs	getplayercords(t_ptrs param, char *map)
 		while (line[param.x] != '\n' && line[param.x] != '\0')
 		{
 			if (line[param.x] == 'P')
+			{
+				free(temp);
 				return (param);
+			}
 			param.x++;
 		}
 		param.y++;
@@ -37,12 +39,6 @@ t_ptrs	getplayercords(t_ptrs param, char *map)
 	}
 	close(fd);
 	return (param);
-}
-
-static int	closewindow(t_ptrs *param)
-{
-	mlx_destroy_window(param->mlx, param->win);
-	exit(0);
 }
 
 int	player(int key, t_ptrs *param)

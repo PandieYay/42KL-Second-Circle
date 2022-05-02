@@ -12,9 +12,15 @@
 
 #include "so_long.h"
 
-static int	closewindow(t_ptrs *param)
+int	closewindow(t_ptrs *param)
 {
+	int	i;
+
+	i = -1;
 	mlx_destroy_window(param->mlx, param->win);
+	while (param->map[++i] != NULL)
+		free(param->map[i]);
+	free(param->map);
 	exit(0);
 }
 
@@ -32,6 +38,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	param = generatemap(argv[1]);
+	param.y = 0;
 	param = getplayercords(param, argv[1]);
 	mlx_hook(param.win, 2, 0, &player, &param);
 	mlx_hook(param.win, 17, 0, &closewindow, &param);

@@ -79,6 +79,7 @@ static void	initializemap(t_ptrs param, t_mapsize mapsize, char *map)
 		while (line[mapsize.x] != '\n' && line[mapsize.x] != '\0')
 		{
 			checkcomponents(line, mapsize, param);
+			param.map[mapsize.x][mapsize.y] = line[mapsize.x];
 			mapsize.x++;
 		}
 		mapsize.y++;
@@ -92,11 +93,17 @@ t_ptrs	generatemap(char *map)
 {
 	t_ptrs		param;
 	t_mapsize	mapsize;
+	int			i;
 
 	mapsize = getmapsize(map);
 	param.mlx = mlx_init();
 	param.win = mlx_new_window(param.mlx, mapsize.x * 64,
 			mapsize.y * 64, "./so_long");
+	param.map = malloc(sizeof(char *) * mapsize.x + 1);
+	i = -1;
+	while (++i < mapsize.x)
+		param.map[i] = malloc(sizeof(char) * mapsize.y);
+	param.map[mapsize.x] = NULL;
 	initializemap(param, mapsize, map);
 	return (param);
 }
