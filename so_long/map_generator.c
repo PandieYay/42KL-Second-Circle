@@ -37,7 +37,7 @@ static t_mapsize	getmapsize(char *map)
 	return (mapsize);
 }
 
-static void	checkcomponents(char *line, t_mapsize mapsize, t_ptrs param)
+static t_ptrs	checkcomponents(char *line, t_mapsize mapsize, t_ptrs param)
 {
 	void	*img;
 
@@ -46,7 +46,10 @@ static void	checkcomponents(char *line, t_mapsize mapsize, t_ptrs param)
 	if (line[mapsize.x] == 'E')
 		img = param.exit;
 	if (line[mapsize.x] == 'C')
+	{
 		img = param.coin;
+		param.coinc++;
+	}
 	if (line[mapsize.x] == 'P')
 		img = param.player;
 	if (line[mapsize.x] == '0')
@@ -56,6 +59,7 @@ static void	checkcomponents(char *line, t_mapsize mapsize, t_ptrs param)
 		mlx_put_image_to_window(param.mlx, param.win, img,
 			mapsize.x * 64, mapsize.y * 64);
 	}
+	return (param);
 }
 
 static t_ptrs	initializeimages(t_ptrs param)
@@ -68,7 +72,7 @@ static t_ptrs	initializeimages(t_ptrs param)
 	return (param);
 }
 
-static void	initializemap(t_ptrs param, t_mapsize mapsize, char *map)
+static t_ptrs	initializemap(t_ptrs param, t_mapsize mapsize, char *map)
 {
 	char	*line;
 	char	*temp;
@@ -83,7 +87,7 @@ static void	initializemap(t_ptrs param, t_mapsize mapsize, char *map)
 		temp = line;
 		while (line[mapsize.x] != '\n' && line[mapsize.x] != '\0')
 		{
-			checkcomponents(line, mapsize, param);
+			param = checkcomponents(line, mapsize, param);
 			param.map[mapsize.x][mapsize.y] = line[mapsize.x];
 			mapsize.x++;
 		}
@@ -92,6 +96,7 @@ static void	initializemap(t_ptrs param, t_mapsize mapsize, char *map)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	return (param);
 }
 
 t_ptrs	generatemap(char *map)
@@ -110,6 +115,7 @@ t_ptrs	generatemap(char *map)
 		param.map[i] = malloc(sizeof(char) * mapsize.y);
 	param.map[mapsize.x] = NULL;
 	param = initializeimages(param);
-	initializemap(param, mapsize, map);
+	param.coinc = 0;
+	param = initializemap(param, mapsize, map);
 	return (param);
 }

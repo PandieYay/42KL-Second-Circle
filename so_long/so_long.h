@@ -23,6 +23,7 @@ typedef struct s_ptrs {
 	void	*win;
 	int		x;
 	int		y;
+	int		coinc;
 	char	**map;
 	void	*player;
 	void	*coin;

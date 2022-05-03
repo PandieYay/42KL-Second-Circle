@@ -51,8 +51,9 @@ static void	moveplayer(t_ptrs param, int x, int y)
 
 int	player(int key, t_ptrs *param)
 {
-	int	tempx;
-	int	tempy;
+	static int	i = 0;
+	int			tempx;
+	int			tempy;
 
 	tempx = param->x;
 	tempy = param->y;
@@ -66,8 +67,18 @@ int	player(int key, t_ptrs *param)
 		param->y++;
 	if (key == 2)
 		param->x++;
-	if (param->map[param->x][param->y] != '1')
+	if (param->map[param->x][param->y] != '1'
+		&& param->map[param->x][param->y] != 'E')
+	{
+		if (param->map[param->x][param->y] == 'C')
+		{
+			param->map[param->x][param->y] = '0';
+			i++;
+		}
 		moveplayer(*param, tempx, tempy);
+	}
+	else if (param->map[param->x][param->y] == 'E' && i == param->coinc)
+		closewindow(param);
 	else
 	{
 		param->x = tempx;
