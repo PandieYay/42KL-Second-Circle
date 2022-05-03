@@ -43,6 +43,8 @@ t_ptrs	getplayercords(t_ptrs param, char *map)
 
 static void	moveplayer(t_ptrs param, int x, int y)
 {
+	mlx_put_image_to_window(param.mlx, param.win, param.wall,
+		1 * 64, 0);
 	mlx_put_image_to_window(param.mlx, param.win, param.empty,
 		x * 64, y * 64);
 	mlx_put_image_to_window(param.mlx, param.win, param.player,
@@ -52,6 +54,7 @@ static void	moveplayer(t_ptrs param, int x, int y)
 int	player(int key, t_ptrs *param)
 {
 	static int	i = 0;
+	static int	movement = 0;
 	int			tempx;
 	int			tempy;
 
@@ -76,6 +79,8 @@ int	player(int key, t_ptrs *param)
 			i++;
 		}
 		moveplayer(*param, tempx, tempy);
+		movement++;
+		mlx_string_put(param->mlx, param->win, 75, 0, 0xFFFF, ft_itoa(movement));
 	}
 	else if (param->map[param->x][param->y] == 'E' && i == param->coinc)
 		closewindow(param);

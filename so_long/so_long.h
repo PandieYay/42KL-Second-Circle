@@ -53,6 +53,7 @@ void	ft_putstr(char *s);
 void	*point_image(char *path, t_ptrs param);
 void	destory_images(t_ptrs param);
 char	*get_next_line(int fd);
+char	*ft_itoa(int n);
 int		player(int key, t_ptrs *param);
 int		checkmap(char *map);
 int		closewindow(t_ptrs *param);
