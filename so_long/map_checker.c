@@ -70,6 +70,9 @@ static t_map	checklines(char *line, int fd, t_map list)
 		list.wallc = 1;
 		while (line[i] != '\n' && line[i] != '\0')
 		{
+			if (line[i] != '0' && line[i] != '1' && line[i] != 'C'
+				&& line[i] != 'E' && line[i] != 'P')
+				list.returnnum = -1;
 			list = checkcomponents(line, i, list);
 			if (line[i + 1] == '\n' || line[1 + 1] == '\0')
 				if (line[i] != '1')
