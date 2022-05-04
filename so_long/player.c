@@ -41,25 +41,22 @@ t_ptrs	getplayercords(t_ptrs param, char *map)
 	return (param);
 }
 
-static void	moveplayer(t_ptrs param, int x, int y)
+static t_ptrs	*moveplayer(t_ptrs *param, int x, int y)
 {
-	mlx_put_image_to_window(param.mlx, param.win, param.wall,
+	param->movement++;
+	mlx_put_image_to_window(param->mlx, param->win, param->wall,
 		1 * 64, 0);
-	mlx_put_image_to_window(param.mlx, param.win, param.empty,
+	mlx_put_image_to_window(param->mlx, param->win, param->empty,
 		x * 64, y * 64);
-	mlx_put_image_to_window(param.mlx, param.win, param.player,
-		param.x * 64, param.y * 64);
+	mlx_put_image_to_window(param->mlx, param->win, param->player,
+		param->x * 64, param->y * 64);
+	mlx_string_put(param->mlx, param->win, 75, 0, 0xFFFF,
+		ft_itoa(param->movement));
+	return (param);
 }
 
-int	player(int key, t_ptrs *param)
+static t_ptrs	*checkparam(int key, t_ptrs *param)
 {
-	static int	i = 0;
-	static int	movement = 0;
-	int			tempx;
-	int			tempy;
-
-	tempx = param->x;
-	tempy = param->y;
 	if (key == 53)
 		closewindow(param);
 	if (key == 0)
@@ -70,6 +67,14 @@ int	player(int key, t_ptrs *param)
 		param->y++;
 	if (key == 2)
 		param->x++;
+	return (param);
+}
+
+static t_ptrs	*keypressed(t_ptrs *param, int key, int tempx, int tempy)
+{
+	static int	i = 0;
+
+	param = checkparam(key, param);
 	if (param->map[param->x][param->y] != '1'
 		&& param->map[param->x][param->y] != 'E')
 	{
@@ -78,9 +83,7 @@ int	player(int key, t_ptrs *param)
 			param->map[param->x][param->y] = '0';
 			i++;
 		}
-		moveplayer(*param, tempx, tempy);
-		movement++;
-		mlx_string_put(param->mlx, param->win, 75, 0, 0xFFFF, ft_itoa(movement));
+		param = moveplayer(param, tempx, tempy);
 	}
 	else if (param->map[param->x][param->y] == 'E' && i == param->coinc)
 		closewindow(param);
@@ -89,5 +92,19 @@ int	player(int key, t_ptrs *param)
 		param->x = tempx;
 		param->y = tempy;
 	}
+	return (param);
+}
+
+int	player(int key, t_ptrs *param)
+{
+	int			tempx;
+	int			tempy;
+
+	tempx = param->x;
+	tempy = param->y;
+	if (key == 53)
+		closewindow(param);
+	if (key == 0 || key == 13 || key == 1 || key == 2)
+		param = keypressed(param, key, tempx, tempy);
 	return (0);
 }

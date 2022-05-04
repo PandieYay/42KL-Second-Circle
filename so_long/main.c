@@ -40,6 +40,8 @@ int	main(int argc, char **argv)
 	param.y = 0;
 	param = getplayercords(param, argv[1]);
 	mlx_string_put(param.mlx, param.win, 0, 0, 0xFFFF, "Moves:");
+	mlx_string_put(param.mlx, param.win, 75, 0, 0xFFFF, "0");
+	param.movement = 0;
 	mlx_hook(param.win, 2, 0, &player, &param);
 	mlx_hook(param.win, 17, 0, &closewindow, &param);
 	mlx_loop(param.mlx);
