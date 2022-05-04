@@ -68,11 +68,22 @@ static t_ptrs	checkcomponents(char *line, t_mapsize mapsize, t_ptrs param)
 static t_ptrs	initializeimages(t_ptrs param)
 {
 	param.player = point_image("sprites/player.xpm", param);
+	param.player1 = point_image("sprites/player1.xpm", param);
+	param.player2 = point_image("sprites/player2.xpm", param);
+	param.player3 = point_image("sprites/player3.xpm", param);
+	param.player4 = point_image("sprites/player4.xpm", param);
+	param.player5 = point_image("sprites/player5.xpm", param);
 	param.coin = point_image("sprites/coin.xpm", param);
 	param.wall = point_image("sprites/wall.xpm", param);
 	param.exit = point_image("sprites/exit.xpm", param);
 	param.empty = point_image("sprites/empty.xpm", param);
 	param.enemy = point_image("sprites/enemy.xpm", param);
+	param.enemy1 = point_image("sprites/enemy1.xpm", param);
+	param.enemy2 = point_image("sprites/enemy2.xpm", param);
+	param.enemy3 = point_image("sprites/enemy3.xpm", param);
+	param.enemy4 = point_image("sprites/enemy4.xpm", param);
+	param.enemy5 = point_image("sprites/enemy5.xpm", param);
+	param.enemy6 = point_image("sprites/enemy6.xpm", param);
 	return (param);
 }
 

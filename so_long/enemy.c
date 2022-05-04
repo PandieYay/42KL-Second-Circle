@@ -45,8 +45,6 @@ static t_ptrs	*moveenemy(t_ptrs *param, int x, int y)
 {
 	mlx_put_image_to_window(param->mlx, param->win, param->empty,
 		x * 64, y * 64);
-	mlx_put_image_to_window(param->mlx, param->win, param->enemy,
-		param->enemyx * 64, param->enemyy * 64);
 	param->map[x][y] = '0';
 	param->map[param->enemyx][param->enemyy] = 'B';
 	return (param);

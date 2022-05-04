@@ -25,6 +25,16 @@ int	closewindow(t_ptrs *param)
 	exit(0);
 }
 
+int	animation(t_ptrs *param)
+{
+	if (param->frames == 70)
+		param->frames = -1;
+	param->frames++;
+	enemyanimation(param);
+	playeranimation(param);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_ptrs	param;
@@ -44,7 +54,9 @@ int	main(int argc, char **argv)
 	mlx_string_put(param.mlx, param.win, 0, 0, 0xFFFF, "Moves:");
 	mlx_string_put(param.mlx, param.win, 75, 0, 0xFFFF, "0");
 	param.movement = 0;
+	param.frames = -1;
 	mlx_hook(param.win, 2, 0, &player, &param);
 	mlx_hook(param.win, 17, 0, &closewindow, &param);
+	mlx_loop_hook(param.mlx, animation, &param);
 	mlx_loop(param.mlx);
 }
