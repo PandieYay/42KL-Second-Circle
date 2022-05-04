@@ -60,10 +60,8 @@ static t_ptrs	checkcomponents(char *line, t_mapsize mapsize, t_ptrs param)
 		param.enemythere = 1;
 	}
 	if (img != NULL)
-	{
 		mlx_put_image_to_window(param.mlx, param.win, img,
 			mapsize.x * 64, mapsize.y * 64);
-	}
 	return (param);
 }
 
