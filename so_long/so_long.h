@@ -23,6 +23,9 @@ typedef struct s_ptrs {
 	void	*win;
 	int		x;
 	int		y;
+	int		enemyx;
+	int		enemyy;
+	int		enemythere;
 	int		movement;
 	int		coinc;
 	char	**map;
@@ -31,6 +34,7 @@ typedef struct s_ptrs {
 	void	*wall;
 	void	*exit;
 	void	*empty;
+	void	*enemy;
 
 }	t_ptrs;
 
@@ -53,6 +57,7 @@ void	ft_putnbr(int n);
 void	ft_putstr(char *s);
 void	*point_image(char *path, t_ptrs param);
 void	destory_images(t_ptrs param);
+void	enemy(int key, t_ptrs *param);
 char	*get_next_line(int fd);
 char	*ft_itoa(int n);
 int		player(int key, t_ptrs *param);
@@ -60,5 +65,6 @@ int		checkmap(char *map);
 int		closewindow(t_ptrs *param);
 t_ptrs	generatemap(char *map);
 t_ptrs	getplayercords(t_ptrs param, char *map);
+t_ptrs	getenemycords(t_ptrs param, char *map);
 
 #endif

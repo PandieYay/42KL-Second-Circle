@@ -52,13 +52,13 @@ static t_ptrs	*moveplayer(t_ptrs *param, int x, int y)
 		param->x * 64, param->y * 64);
 	mlx_string_put(param->mlx, param->win, 75, 0, 0xFFFF,
 		ft_itoa(param->movement));
+	param->map[x][y] = '0';
+	param->map[param->x][param->y] = 'P';
 	return (param);
 }
 
 static t_ptrs	*checkparam(int key, t_ptrs *param)
 {
-	if (key == 53)
-		closewindow(param);
 	if (key == 0)
 		param->x--;
 	if (key == 13)
@@ -78,11 +78,10 @@ static t_ptrs	*keypressed(t_ptrs *param, int key, int tempx, int tempy)
 	if (param->map[param->x][param->y] != '1'
 		&& param->map[param->x][param->y] != 'E')
 	{
+		if (param->map[param->x][param->y] == 'B')
+			closewindow(param);
 		if (param->map[param->x][param->y] == 'C')
-		{
-			param->map[param->x][param->y] = '0';
 			i++;
-		}
 		param = moveplayer(param, tempx, tempy);
 	}
 	else if (param->map[param->x][param->y] == 'E' && i == param->coinc)
@@ -97,8 +96,8 @@ static t_ptrs	*keypressed(t_ptrs *param, int key, int tempx, int tempy)
 
 int	player(int key, t_ptrs *param)
 {
-	int			tempx;
-	int			tempy;
+	int	tempx;
+	int	tempy;
 
 	tempx = param->x;
 	tempy = param->y;
@@ -106,5 +105,7 @@ int	player(int key, t_ptrs *param)
 		closewindow(param);
 	if (key == 0 || key == 13 || key == 1 || key == 2)
 		param = keypressed(param, key, tempx, tempy);
+	else if (param->enemythere == 1)
+		enemy(key, param);
 	return (0);
 }

@@ -54,6 +54,11 @@ static t_ptrs	checkcomponents(char *line, t_mapsize mapsize, t_ptrs param)
 		img = param.player;
 	if (line[mapsize.x] == '0')
 		img = NULL;
+	if (line[mapsize.x] == 'B')
+	{
+		img = param.enemy;
+		param.enemythere = 1;
+	}
 	if (img != NULL)
 	{
 		mlx_put_image_to_window(param.mlx, param.win, img,
@@ -69,6 +74,7 @@ static t_ptrs	initializeimages(t_ptrs param)
 	param.wall = point_image("sprites/wall.xpm", param);
 	param.exit = point_image("sprites/exit.xpm", param);
 	param.empty = point_image("sprites/empty.xpm", param);
+	param.enemy = point_image("sprites/enemy.xpm", param);
 	return (param);
 }
 
@@ -116,6 +122,7 @@ t_ptrs	generatemap(char *map)
 	param.map[mapsize.x] = NULL;
 	param = initializeimages(param);
 	param.coinc = 0;
+	param.enemythere = 0;
 	param = initializemap(param, mapsize, map);
 	return (param);
 }

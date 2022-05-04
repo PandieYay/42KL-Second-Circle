@@ -29,4 +29,5 @@ void	destory_images(t_ptrs param)
 	mlx_destroy_image(param.mlx, param.wall);
 	mlx_destroy_image(param.mlx, param.exit);
 	mlx_destroy_image(param.mlx, param.empty);
+	mlx_destroy_image(param.mlx, param.enemy);
 }
