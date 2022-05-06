@@ -43,6 +43,8 @@ t_ptrs	getplayercords(t_ptrs param, char *map)
 
 static t_ptrs	*moveplayer(t_ptrs *param, int x, int y)
 {
+	char	*temp;
+
 	param->movement++;
 	mlx_put_image_to_window(param->mlx, param->win, param->wall,
 		1 * 64, 0);
@@ -50,8 +52,9 @@ static t_ptrs	*moveplayer(t_ptrs *param, int x, int y)
 		x * 64, y * 64);
 	mlx_put_image_to_window(param->mlx, param->win, param->player,
 		param->x * 64, param->y * 64);
-	mlx_string_put(param->mlx, param->win, 75, 0, 0xFFFF,
-		ft_itoa(param->movement));
+	temp = ft_itoa(param->movement);
+	mlx_string_put(param->mlx, param->win, 75, 0, 0xFFFF, temp);
+	free(temp);
 	param->map[x][y] = '0';
 	param->map[param->x][param->y] = 'P';
 	return (param);

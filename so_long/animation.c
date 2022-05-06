@@ -43,22 +43,55 @@ void	playeranimation(t_ptrs *param)
 {
 	mlx_put_image_to_window(param->mlx, param->win, param->empty,
 		param->x * 64, param->y * 64);
-	if (param->frames >= 60)
-		mlx_put_image_to_window(param->mlx, param->win, param->player5,
-			param->x * 64, param->y * 64);
-	else if (param->frames >= 50)
+	if (param->frames >= 56)
 		mlx_put_image_to_window(param->mlx, param->win, param->player4,
 			param->x * 64, param->y * 64);
-	else if (param->frames >= 40)
+	else if (param->frames >= 42)
 		mlx_put_image_to_window(param->mlx, param->win, param->player3,
 			param->x * 64, param->y * 64);
-	else if (param->frames >= 30)
+	else if (param->frames >= 28)
 		mlx_put_image_to_window(param->mlx, param->win, param->player2,
 			param->x * 64, param->y * 64);
-	else if (param->frames >= 20)
+	else if (param->frames >= 14)
 		mlx_put_image_to_window(param->mlx, param->win, param->player1,
 			param->x * 64, param->y * 64);
 	else
 		mlx_put_image_to_window(param->mlx, param->win, param->player,
 			param->x * 64, param->y * 64);
+}
+
+static void	putcoinanimation(t_ptrs *param, int i, int k)
+{
+	mlx_put_image_to_window(param->mlx, param->win, param->empty,
+		i * 64, k * 64);
+	if (param->frames >= 54)
+		mlx_put_image_to_window(param->mlx, param->win, param->coin3,
+			i * 64, k * 64);
+	else if (param->frames >= 36)
+		mlx_put_image_to_window(param->mlx, param->win, param->coin2,
+			i * 64, k * 64);
+	else if (param->frames >= 18)
+		mlx_put_image_to_window(param->mlx, param->win, param->coin1,
+			i * 64, k * 64);
+	else
+		mlx_put_image_to_window(param->mlx, param->win, param->coin,
+			i * 64, k * 64);
+}
+
+void	coinanimation(t_ptrs *param)
+{
+	int	i;
+	int	k;
+
+	i = -1;
+	while (param->map[++i] != NULL)
+	{
+		k = 0;
+		while (param->map[i][k] != '\0' && param->map[i][k] != '\n')
+		{
+			if (param->map[i][k] == 'C')
+				putcoinanimation(param, i, k);
+			k++;
+		}
+	}
 }

@@ -72,8 +72,10 @@ static t_ptrs	initializeimages(t_ptrs param)
 	param.player2 = point_image("sprites/player2.xpm", param);
 	param.player3 = point_image("sprites/player3.xpm", param);
 	param.player4 = point_image("sprites/player4.xpm", param);
-	param.player5 = point_image("sprites/player5.xpm", param);
 	param.coin = point_image("sprites/coin.xpm", param);
+	param.coin1 = point_image("sprites/coin1.xpm", param);
+	param.coin2 = point_image("sprites/coin2.xpm", param);
+	param.coin3 = point_image("sprites/coin3.xpm", param);
 	param.wall = point_image("sprites/wall.xpm", param);
 	param.exit = point_image("sprites/exit.xpm", param);
 	param.empty = point_image("sprites/empty.xpm", param);

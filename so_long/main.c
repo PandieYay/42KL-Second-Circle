@@ -32,6 +32,7 @@ int	animation(t_ptrs *param)
 	param->frames++;
 	enemyanimation(param);
 	playeranimation(param);
+	coinanimation(param);
 	return (0);
 }
 
