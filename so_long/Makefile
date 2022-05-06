@@ -1,12 +1,12 @@
 NAME = so_long
-SRCS = *.c Libft/*.c
-OBJS = ${SRCS:.c=.o}
+LIBFT = Libft/ft_itoa.c Libft/ft_putnbr.c Libft/ft_putstr.c Libft/get_next_line_bonus.c Libft/get_next_line_utils_bonus.c
+SRCS = ./main.c ./animation.c ./enemy.c ./map_checker.c ./map_generator.c ./player.c ./pointanddestroy.c
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): ${SRCS}
-	gcc ${FLAGS} -o so_long ${SRCS} -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+$(NAME): ${SRCS} ${LIBFT}
+	gcc ${FLAGS} -o ${NAME} ${SRCS} ${LIBFT} -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
 clean:
 	rm -f ${OBJS}
