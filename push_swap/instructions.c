@@ -15,7 +15,7 @@
 
 void	sa(t_array *array)
 {
-	char	*temp;
+	int	temp;
 
 	write(1, "sa\n", 3);
 	temp = array->stacka[0];
@@ -25,7 +25,7 @@ void	sa(t_array *array)
 
 void	sb(t_array *array)
 {
-	char	*temp;
+	int	temp;
 
 	write(1, "sb\n", 3);
 	temp = array->stackb[0];
@@ -35,7 +35,7 @@ void	sb(t_array *array)
 
 void	ss(t_array *array)
 {
-	char	*temp;
+	int	temp;
 
 	temp = array->stacka[0];
 	array->stacka[0] = array->stacka[1];
@@ -65,6 +65,7 @@ void	pa(t_array *array)
 		i++;
 	}
 	array->sizeb--;
+	write(1, "pa\n", 3);
 }
 
 void	pb(t_array *array)
@@ -86,4 +87,5 @@ void	pb(t_array *array)
 		i++;
 	}
 	array->sizea--;
+	write(1, "pb\n", 3);
 }

@@ -15,7 +15,7 @@
 void	ra(t_array *array)
 {
 	int		i;
-	char	*temp;
+	int		temp;
 
 	temp = array->stacka[0];
 	i = 0;
@@ -31,7 +31,7 @@ void	ra(t_array *array)
 void	rb(t_array *array)
 {
 	int		i;
-	char	*temp;
+	int		temp;
 
 	temp = array->stackb[0];
 	i = 0;
@@ -47,7 +47,7 @@ void	rb(t_array *array)
 void	rr(t_array *array)
 {
 	int		i;
-	char	*temp;
+	int		temp;
 
 	temp = array->stacka[0];
 	i = 0;

@@ -17,8 +17,8 @@
 # include <stdlib.h>
 
 typedef struct s_array {
-	char	**stacka;
-	char	**stackb;
+	int		*stacka;
+	int		*stackb;
 	int		sizea;
 	int		sizeb;
 }	t_array;
@@ -36,6 +36,7 @@ void	ra(t_array *array);
 void	rb(t_array *array);
 void	rr(t_array *array);
 void	rra(t_array *array);
+void	rrb(t_array *array);
 void	rrr(t_array *array);
 
 #endif

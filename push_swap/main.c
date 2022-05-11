@@ -19,31 +19,57 @@ static void	fillstacks(char **argv, t_array *array)
 	i = 0;
 	while (argv[i + 1] != NULL)
 		i++;
-	array->stacka = malloc(sizeof(char *) * (i + 1));
-	array->stacka[i] = NULL;
-	array->stackb = malloc(sizeof(char *) * (i + 1));
-	array->stackb[i] = NULL;
+	array->stacka = malloc(sizeof(char *) * i);
+	array->stackb = malloc(sizeof(char *) * i);
 	array->sizea = i;
 	array->sizeb = 0;
 	i = 0;
 	while (argv[++i] != NULL)
-		array->stacka[i - 1] = argv[i];
+		array->stacka[i - 1] = ft_atoi(argv[i]);
 }
 
-// static void sortstack(char **stacka)
-// {
-// 	int	i;
+static void swap(int *a, int *b)
+{
+    int temp;
 
-// 	i = 0;
-// 	while (stacka[i + 1] != NULL)
-// 		i++;
-// 	if (ft_atoi(stacka[0]) > ft_atoi(stacka[i]))
-// 		stacka = ra(stacka);
-// 	else if (ft_atoi(stacka[0]) > ft_atoi(stacka[1]))
-// 		stacka = swap(stacka, 'a');
-// 	else if (ft_atoi(stacka[i]) > ft_atoi(stacka[0]))
-// 		stacka = rra(stacka);
-// }
+	temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+static int	partition(t_array array, int low, int high)
+{
+	int	pivot;
+	int	i;
+	int	k;
+
+	pivot = array.stacka[high];
+	i = (low - 1);
+	k = low;
+	while (k < high)
+	{
+		if (array.stacka[k] < pivot)
+		{
+			i++;
+			swap(&array.stacka[i], &array.stacka[k]);
+		}
+		k++;
+	}
+	swap(&array.stacka[i + 1], &array.stacka[high]);
+	return (i + 1);
+}
+
+static void	quicksort(t_array array, int low, int high)
+{
+	int	pi;
+
+	if (low < high)
+	{
+		pi = partition(array, low, high);
+		quicksort(array, low, pi - 1);
+		quicksort(array, pi + 1, high);
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -56,10 +82,8 @@ int	main(int argc, char **argv)
 		return (-1);
 	fillstacks(argv, &array);
 	// if (argc >= 3)
-	pb(&array);
-	pb(&array);
-	pa(&array);
+	quicksort(array, 0, array.sizea - 1);
 	i = -1;
-	while (++i < 4)
-		printf("%s", array.stacka[i]);
+	while (++i < array.sizea)
+		printf("%d", array.stacka[i]);
 }
