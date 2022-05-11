@@ -28,46 +28,69 @@ static void	fillstacks(char **argv, t_array *array)
 		array->stacka[i - 1] = ft_atoi(argv[i]);
 }
 
-static void swap(int *a, int *b)
-{
-    int temp;
+// static void swap(int *a, int *b)
+// {
+//     int temp;
 
-	temp = *a;
-    *a = *b;
-    *b = temp;
-}
+// 	temp = *a;
+//     *a = *b;
+//     *b = temp;
+// }
 
-static int	partition(t_array array, int low, int high)
+// static int	partition(t_array array, int low, int high)
+// {
+// 	int	pivot;
+// 	int	i;
+// 	int	k;
+
+// 	pivot = array.stacka[high];
+// 	i = (low - 1);
+// 	k = low;
+// 	while (k < high)
+// 	{
+// 		if (array.stacka[k] < pivot)
+// 		{
+// 			i++;
+// 			swap(&array.stacka[i], &array.stacka[k]);
+// 		}
+// 		k++;
+// 	}
+// 	swap(&array.stacka[i + 1], &array.stacka[high]);
+// 	return (i + 1);
+// }
+
+// static void	quicksort(t_array array, int low, int high)
+// {
+// 	int	pi;
+
+// 	if (low < high)
+// 	{
+// 		pi = partition(array, low, high);
+// 		quicksort(array, low, pi - 1);
+// 		quicksort(array, pi + 1, high);
+// 	}
+// }
+
+void	insertionsort(t_array *array, int n)
 {
-	int	pivot;
 	int	i;
 	int	k;
 
-	pivot = array.stacka[high];
-	i = (low - 1);
-	k = low;
-	while (k < high)
+	i = 1;
+	while (i < n)
 	{
-		if (array.stacka[k] < pivot)
+		k = i - 1;
+		while (k >= 0 && array->stacka[k] > array->stacka[i])
 		{
-			i++;
-			swap(&array.stacka[i], &array.stacka[k]);
+			if (array->stacka[0] > array->stacka[1])
+				sa(array);
+			else
+				rra(array);
+			k = k - 1;
 		}
-		k++;
-	}
-	swap(&array.stacka[i + 1], &array.stacka[high]);
-	return (i + 1);
-}
-
-static void	quicksort(t_array array, int low, int high)
-{
-	int	pi;
-
-	if (low < high)
-	{
-		pi = partition(array, low, high);
-		quicksort(array, low, pi - 1);
-		quicksort(array, pi + 1, high);
+		if (array->stacka[0] > array->stacka[1])
+			sa(array);
+		i++;
 	}
 }
 
@@ -81,8 +104,8 @@ int	main(int argc, char **argv)
 	if (checkarg(argv) == -1)
 		return (-1);
 	fillstacks(argv, &array);
-	// if (argc >= 3)
-	quicksort(array, 0, array.sizea - 1);
+	if (array.sizea <= 3)
+		insertionsort(&array, array.sizea);
 	i = -1;
 	while (++i < array.sizea)
 		printf("%d", array.stacka[i]);
