@@ -12,9 +12,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	nb;
-	int	minusi;
-	int	i;
+	long	nb;
+	int		minusi;
+	int		i;
 
 	nb = 0;
 	minusi = 1;
@@ -33,5 +33,7 @@ int	ft_atoi(const char *str)
 		nb = nb * 10 + (str[i] - 48);
 		i++;
 	}
+	if (nb > 2147483647)
+		return (-1);
 	return (nb * minusi);
 }

@@ -50,6 +50,11 @@ int	checkarg(char **argv)
 		k = i;
 		if (checkint(argv[i]) == -1)
 			return (-1);
+		if (ft_atoi(argv[i]) == -1)
+		{
+			write(1, "Error\n", 6);
+			return (-1);
+		}
 		while (argv[k + 1] != NULL)
 		{
 			if (ft_strcmp(argv[i], argv[k + 1]) == 0)
