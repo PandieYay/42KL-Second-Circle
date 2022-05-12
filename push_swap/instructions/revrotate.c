@@ -41,7 +41,7 @@ void	rrb(t_array *array)
 		i++;
 	}
 	array->stackb[array->sizeb - i] = temp;
-	write(1, "rra\n", 4);
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_array *array)
