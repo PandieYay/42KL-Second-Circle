@@ -1,6 +1,6 @@
 NAME = push_swap
 LIBFT = Libft/ft_strncmp.c Libft/ft_strcmp.c Libft/ft_atoi.c
-SRCS = ./main.c ./arg_checker.c ./instructions.c ./rotinstructions.c ./revrotinstructions.c
+SRCS = ./main.c ./arg_checker.c instructions/instructions.c instructions/rotate.c instructions/revrotate.c
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
