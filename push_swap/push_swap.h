@@ -26,6 +26,7 @@ typedef struct s_array {
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 int		ft_atoi(const char *str);
+char	**ft_split(char const *s, char c);
 int		checkarg(char **argv);
 void	sa(t_array *array);
 void	sb(t_array *array);

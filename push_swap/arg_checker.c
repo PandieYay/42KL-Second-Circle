@@ -44,7 +44,7 @@ int	checkarg(char **argv)
 	int	i;
 	int	k;
 
-	i = 0;
+	i = -1;
 	while (argv[++i] != NULL)
 	{
 		k = i;

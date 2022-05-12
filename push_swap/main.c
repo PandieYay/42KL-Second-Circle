@@ -17,15 +17,15 @@ static void	fillstacks(char **argv, t_array *array)
 	int		i;
 
 	i = 0;
-	while (argv[i + 1] != NULL)
+	while (argv[i] != NULL)
 		i++;
 	array->stacka = malloc(sizeof(char *) * i);
 	array->stackb = malloc(sizeof(char *) * i);
 	array->sizea = i;
 	array->sizeb = 0;
-	i = 0;
+	i = -1;
 	while (argv[++i] != NULL)
-		array->stacka[i - 1] = ft_atoi(argv[i]);
+		array->stacka[i] = ft_atoi(argv[i]);
 }
 
 // static void swap(int *a, int *b)
@@ -94,6 +94,18 @@ void	insertionsort(t_array *array, int n)
 	}
 }
 
+static void	rmout(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i] != NULL)
+	{
+		argv[i] = argv[i + 1];
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
@@ -101,6 +113,10 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (-1);
+	if (argc == 2)
+		argv = ft_split(argv[1], ' ');
+	else
+		rmout(argv);
 	if (checkarg(argv) == -1)
 		return (-1);
 	fillstacks(argv, &array);
