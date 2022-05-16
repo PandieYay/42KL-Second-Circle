@@ -99,9 +99,18 @@ void	quicksortb(t_array *array, int len)
 	else
 	{
 		insertionsortb(array, len);
-		pa(array);
-		pa(array);
-		if (array->sizeb == 1)
+		if (len == 3)
+		{
+			pa(array);
+			pa(array);
+			pa(array);
+		}
+		else if (len == 2)
+		{
+			pa(array);
+			pa(array);
+		}
+		else
 			pa(array);
 	}
 }

@@ -36,13 +36,13 @@ void	ss(t_array *array)
 {
 	int	temp;
 
+	write(1, "ss\n", 3);
 	temp = array->stacka[0];
 	array->stacka[0] = array->stacka[1];
 	array->stacka[1] = temp;
 	temp = array->stackb[0];
 	array->stackb[0] = array->stackb[1];
 	array->stackb[1] = temp;
-	write(1, "ss\n", 3);
 }
 
 void	pa(t_array *array)
@@ -50,6 +50,7 @@ void	pa(t_array *array)
 	int	i;
 
 	i = 0;
+	write(1, "pa\n", 3);
 	while (i < array->sizea)
 	{
 		array->stacka[array->sizea - i] = array->stacka[array->sizea - i - 1];
@@ -64,7 +65,6 @@ void	pa(t_array *array)
 		i++;
 	}
 	array->sizeb--;
-	write(1, "pa\n", 3);
 }
 
 void	pb(t_array *array)
@@ -72,6 +72,7 @@ void	pb(t_array *array)
 	int	i;
 
 	i = 0;
+	write(1, "pb\n", 3);
 	while (i < array->sizeb)
 	{
 		array->stackb[array->sizeb - i] = array->stackb[array->sizeb - i - 1];
@@ -86,5 +87,4 @@ void	pb(t_array *array)
 		i++;
 	}
 	array->sizea--;
-	write(1, "pb\n", 3);
 }
