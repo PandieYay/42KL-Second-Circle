@@ -42,6 +42,7 @@ void	rrr(t_array *array);
 void	quicksort(t_array *array, int len);
 void	quicksortb(t_array *array, int len);
 void	insertionsort(t_array *array, int n);
+void	partitionisthree(t_array *array, int len);
 void	insertionsortb(t_array *array, int n);
 int		bubblesort(int *arr, int n);
 

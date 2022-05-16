@@ -1,16 +1,27 @@
-#include "push_swap.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   findmedian.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edlim <edlim@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 10:23:22 by edlim             #+#    #+#             */
+/*   Updated: 2022/05/16 10:23:23 by edlim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void swap(int *a, int *b)
+#include "push_swap.h"
+
+static void	swap(int *a, int *b)
 {
-    int temp;
+	int	temp;
 
 	temp = *a;
-    *a = *b;
-    *b = temp;
+	*a = *b;
+	*b = temp;
 }
 
-static int *makearray(int *arr, int len)
+static int	*makearray(int *arr, int len)
 {
 	int	*newarr;
 	int	i;
@@ -22,14 +33,14 @@ static int *makearray(int *arr, int len)
 		newarr[i] = arr[i];
 		i++;
 	}
-	return(newarr);
+	return (newarr);
 }
 
 int	bubblesort(int *arr, int len)
 {
 	int	median;
-	int *newarr;
-    int	i;
+	int	*newarr;
+	int	i;
 	int	j;
 
 	i = 0;
@@ -46,6 +57,6 @@ int	bubblesort(int *arr, int len)
 		i++;
 	}
 	median = newarr[len / 2];
-	free(newarr);
-	return(median);
+	free (newarr);
+	return (median);
 }

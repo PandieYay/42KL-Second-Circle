@@ -15,15 +15,17 @@
 
 static int	partition(t_array *array, int len)
 {
-	int	*sortedarray;
 	int	i;
 	int	pi;
+	int	ori;
 	int	count;
+	int	racount;
 
 	pi = 0;
 	count = 0;
-	sortedarray = array->stacka;
-	count = bubblesort(sortedarray, len);
+	racount = 0;
+	ori = array->sizea;
+	count = bubblesort(array->stacka, len);
 	i = -1;
 	while (++i < len)
 	{
@@ -33,7 +35,52 @@ static int	partition(t_array *array, int len)
 			pi++;
 		}
 		else
+		{
 			ra(array);
+			racount++;
+		}
+	}
+	if (ori != len)
+	{
+		i = -1;
+		while (++i < racount)
+			rra(array);
+	}
+	return (pi);
+}
+
+static int	partitionb(t_array *array, int len)
+{
+	int	i;
+	int	pi;
+	int	ori;
+	int	count;
+	int	rbcount;
+
+	pi = 0;
+	count = 0;
+	rbcount = 0;
+	ori = array->sizeb;
+	count = bubblesort(array->stackb, len);
+	i = -1;
+	while (++i < len)
+	{
+		if (array->stackb[0] >= count)
+		{
+			pa(array);
+			pi++;
+		}
+		else
+		{
+			rb(array);
+			rbcount++;
+		}
+	}
+	if (ori != len)
+	{
+		i = -1;
+		while (++i < rbcount)
+			rrb(array);
 	}
 	return (pi);
 }
@@ -44,13 +91,19 @@ void	quicksortb(t_array *array, int len)
 
 	if (len > 3)
 	{
-		pi = partition(array, len);
+		pi = partitionb(array, len);
 		len = len - pi;
-		// quicksort(array, pi);
+		quicksort(array, pi);
+		quicksortb(array, len);
 	}
-	insertionsortb(array, len);
-	pa(array);
-	pa(array);
+	else
+	{
+		insertionsortb(array, len);
+		pa(array);
+		pa(array);
+		if (array->sizeb == 1)
+			pa(array);
+	}
 }
 
 void	quicksort(t_array *array, int len)
@@ -61,9 +114,14 @@ void	quicksort(t_array *array, int len)
 	{
 		pi = partition(array, len);
 		len = len - pi;
-		quicksort(array, array->sizea);
-		// quicksortb(array, pi);
+		quicksort(array, len);
+		quicksortb(array, pi);
 	}
-	insertionsort(array, len);
+	else
+	{
+		if (len == array->sizea)
+			insertionsort(array, len);
+		else
+			partitionisthree(array, len);
+	}
 }
-

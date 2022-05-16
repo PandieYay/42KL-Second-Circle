@@ -40,29 +40,6 @@ static void	rmout(char **argv)
 	}
 }
 
-void	insertionsort(t_array *array, int n)
-{
-	int	i;
-	int	k;
-
-	i = 1;
-	while (i < n)
-	{
-		k = i - 1;
-		while (k >= 0 && array->stacka[k] > array->stacka[i])
-		{
-			if (array->stacka[0] > array->stacka[1])
-				sa(array);
-			else
-				rra(array);
-			k = k - 1;
-		}
-		if (array->stacka[0] > array->stacka[1])
-			sa(array);
-		i++;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	int		i;
@@ -81,8 +58,6 @@ int	main(int argc, char **argv)
 		insertionsort(&array, array.sizea);
 	else
 		quicksort(&array, array.sizea);
-	quicksortb(&array, 2);
-	// quicksort(&array, array.sizea);
 	printf("Stacka: ");
 	i = -1;
 	while (++i < array.sizea)
