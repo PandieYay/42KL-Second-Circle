@@ -42,7 +42,7 @@ static void	rmout(char **argv)
 
 int	main(int argc, char **argv)
 {
-	int		i;
+	// int		i;
 	t_array	array;
 
 	if (argc < 2)
@@ -58,12 +58,12 @@ int	main(int argc, char **argv)
 		insertionsort(&array, array.sizea);
 	else
 		quicksort(&array, array.sizea);
-	printf("Stacka: ");
-	i = -1;
-	while (++i < array.sizea)
-		printf("%d ", array.stacka[i]);
-	printf("\nStackb: ");
-	i = -1;
-	while (++i < array.sizeb)
-		printf("%d ", array.stackb[i]);
+	// printf("Stacka: ");
+	// i = -1;
+	// while (++i < array.sizea)
+	// 	printf("%d ", array.stacka[i]);
+	// printf("\nStackb: ");
+	// i = -1;
+	// while (++i < array.sizeb)
+	// 	printf("%d ", array.stackb[i]);
 }

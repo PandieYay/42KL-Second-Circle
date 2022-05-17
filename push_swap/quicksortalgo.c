@@ -97,22 +97,7 @@ void	quicksortb(t_array *array, int len)
 		quicksortb(array, len);
 	}
 	else
-	{
-		insertionsortb(array, len);
-		if (len == 3)
-		{
-			pa(array);
-			pa(array);
-			pa(array);
-		}
-		else if (len == 2)
-		{
-			pa(array);
-			pa(array);
-		}
-		else
-			pa(array);
-	}
+		partitionisthreeb(array, len);
 }
 
 void	quicksort(t_array *array, int len)

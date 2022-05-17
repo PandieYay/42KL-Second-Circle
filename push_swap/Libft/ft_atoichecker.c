@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+char	ft_atoichecker(const char *str)
 {
-	int	nb;
-	int	minusi;
-	int	i;
+	long	nb;
+	int		minusi;
+	int		i;
 
 	nb = 0;
 	minusi = 1;
@@ -33,5 +33,7 @@ int	ft_atoi(const char *str)
 		nb = nb * 10 + (str[i] - 48);
 		i++;
 	}
-	return (nb * minusi);
+	if (nb > 2147483647)
+		return ('K');
+	return ('O');
 }

@@ -69,6 +69,85 @@ void	partitionisthree(t_array *array, int len)
 			sa(array);
 }
 
+static void	partitionisthreehelperb(t_array *array, int option)
+{
+	if (option == 0)
+	{
+		pa(array);
+		sb(array);
+		pa(array);
+		pa(array);
+	}
+	if (option == 1)
+	{
+		sb(array);
+		pa(array);
+		pa(array);
+		pa(array);
+	}
+}
+
+void	partitionisthreeb(t_array *array, int len)
+{
+	if (len == 1)
+		pa(array);
+	else if (len == 2)
+	{
+		if (array->stackb[1] > array->stackb[0])
+			sb(array);
+		pa(array);
+		pa(array);
+	}
+	else if (array->stackb[0] > array->stackb[1]
+		&& array->stackb[0] > array->stackb[2])
+	{
+		if (array->stackb[1] > array->stackb[2])
+		{
+			pa(array);
+			pa(array);
+			pa(array);
+		}
+		else
+			partitionisthreehelperb(array, 0);
+	}
+	else if (array->stackb[1] > array->stackb[0]
+		&& array->stackb[1] > array->stackb[2])
+	{
+		if (array->stackb[0] > array->stackb[2])
+			partitionisthreehelperb(array, 1);
+		else
+		{
+			sb(array);
+			pa(array);
+			sb(array);
+			pa(array);
+			pa(array);
+		}
+	}
+	else if (array->stackb[2] > array->stackb[0]
+		&& array->stackb[2] > array->stackb[1])
+	{
+		if (array->stackb[0] > array->stackb[1])
+		{
+			rb(array);
+			sb(array);
+			pa(array);
+			rrb(array);
+			pa(array);
+			pa(array);
+		}
+		else
+		{
+			rb(array);
+			sb(array);
+			pa(array);
+			pa(array);
+			rrb(array);
+			pa(array);
+		}
+	}
+}
+
 void	insertionsort(t_array *array, int n)
 {
 	int	i;

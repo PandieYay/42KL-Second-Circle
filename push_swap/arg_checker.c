@@ -50,7 +50,7 @@ int	checkarg(char **argv)
 		k = i;
 		if (checkint(argv[i]) == -1)
 			return (-1);
-		if (ft_atoi(argv[i]) == -1)
+		if (ft_atoichecker(argv[i]) == 'K')
 		{
 			write(1, "Error\n", 6);
 			return (-1);
