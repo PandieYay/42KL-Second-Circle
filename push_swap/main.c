@@ -52,13 +52,15 @@ int	main(int argc, char **argv)
 	if (checkarg(argv) == -1)
 		return (-1);
 	fillstacks(argv, &array);
+	if (bubblesort(array.stacka, &array) == 1)
+		return (-1);
 	if (array.sizea <= 3)
 		insertionsort(&array, array.sizea);
 	else
 		quicksort(&array, array.sizea);
 }
 
-//include <stdio.h>
+//#include <stdio.h>
 // int		i;
 // printf("Stacka: ");
 // i = -1;

@@ -12,33 +12,6 @@
 
 #include "push_swap.h"
 
-static int	checkint(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (*arg != '\0')
-	{
-		if (*arg == '+' || *arg == '-')
-			i++;
-		if (!(*arg >= '0' && *arg <= '9'))
-		{
-			if (*arg != '+' && *arg != '-')
-			{
-				write(1, "Error\n", 6);
-				return (-1);
-			}
-		}
-		arg++;
-	}
-	if (i > 1)
-	{
-		write(1, "Error\n", 6);
-		return (-1);
-	}
-	return (0);
-}
-
 int	checkarg(char **argv)
 {
 	int	i;
@@ -48,8 +21,6 @@ int	checkarg(char **argv)
 	while (argv[++i] != NULL)
 	{
 		k = i;
-		if (checkint(argv[i]) == -1)
-			return (-1);
 		if (ft_atoichecker(argv[i]) == 'K')
 		{
 			write(1, "Error\n", 6);

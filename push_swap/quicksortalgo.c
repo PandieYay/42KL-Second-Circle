@@ -19,7 +19,7 @@ static int	partition(t_array *array, int len)
 	array->pi = 0;
 	array->racount = 0;
 	array->ori = array->sizea;
-	array->median = bubblesort(array->stacka, len);
+	array->median = findmedian(array->stacka, len);
 	i = -1;
 	while (++i < len)
 	{
@@ -48,7 +48,7 @@ static int	partitionb(t_array *array, int len)
 	array->pi = 0;
 	array->rbcount = 0;
 	array->ori = array->sizeb;
-	array->median = bubblesort(array->stackb, len);
+	array->median = findmedian(array->stackb, len);
 	i = -1;
 	while (++i < len)
 	{

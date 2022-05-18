@@ -33,7 +33,8 @@ char	ft_atoichecker(const char *str)
 		nb = nb * 10 + (str[i] - 48);
 		i++;
 	}
-	if (nb > 2147483647)
+	nb = nb * minusi;
+	if (str[i] != '\0' || nb > 2147483647 || nb < -2147483648)
 		return ('K');
 	return ('O');
 }
