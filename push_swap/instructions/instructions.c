@@ -59,7 +59,7 @@ void	pa(t_array *array)
 	array->stacka[0] = array->stackb[0];
 	array->sizea++;
 	i = 0;
-	while (i < array->sizeb)
+	while (i < array->sizeb - 1)
 	{
 		array->stackb[i] = array->stackb[i + 1];
 		i++;
@@ -81,7 +81,7 @@ void	pb(t_array *array)
 	array->stackb[0] = array->stacka[0];
 	array->sizeb++;
 	i = 0;
-	while (i < array->sizea)
+	while (i < array->sizea - 1)
 	{
 		array->stacka[i] = array->stacka[i + 1];
 		i++;
