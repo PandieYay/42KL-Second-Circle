@@ -15,73 +15,59 @@
 static int	partition(t_array *array, int len)
 {
 	int	i;
-	int	pi;
-	int	ori;
-	int	count;
-	int	racount;
 
-	pi = 0;
-	count = 0;
-	racount = 0;
-	ori = array->sizea;
-	count = bubblesort(array->stacka, len);
+	array->pi = 0;
+	array->racount = 0;
+	array->ori = array->sizea;
+	array->median = bubblesort(array->stacka, len);
 	i = -1;
 	while (++i < len)
 	{
-		if (array->stacka[0] < count)
+		if (array->stacka[0] < array->median)
 		{
 			pb(array);
-			pi++;
+			array->pi++;
 		}
 		else
 		{
 			ra(array);
-			racount++;
+			array->racount++;
 		}
 	}
-	if (ori != len)
-	{
-		i = -1;
-		while (++i < racount)
+	i = -1;
+	if (array->ori != len)
+		while (++i < array->racount)
 			rra(array);
-	}
-	return (pi);
+	return (array->pi);
 }
 
 static int	partitionb(t_array *array, int len)
 {
 	int	i;
-	int	pi;
-	int	ori;
-	int	count;
-	int	rbcount;
 
-	pi = 0;
-	count = 0;
-	rbcount = 0;
-	ori = array->sizeb;
-	count = bubblesort(array->stackb, len);
+	array->pi = 0;
+	array->rbcount = 0;
+	array->ori = array->sizeb;
+	array->median = bubblesort(array->stackb, len);
 	i = -1;
 	while (++i < len)
 	{
-		if (array->stackb[0] >= count)
+		if (array->stackb[0] >= array->median)
 		{
 			pa(array);
-			pi++;
+			array->pi++;
 		}
 		else
 		{
 			rb(array);
-			rbcount++;
+			array->rbcount++;
 		}
 	}
-	if (ori != len)
-	{
-		i = -1;
-		while (++i < rbcount)
+	i = -1;
+	if (array->ori != len)
+		while (++i < array->rbcount)
 			rrb(array);
-	}
-	return (pi);
+	return (array->pi);
 }
 
 void	quicksortb(t_array *array, int len)

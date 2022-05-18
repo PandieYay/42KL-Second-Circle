@@ -21,6 +21,11 @@ typedef struct s_array {
 	int		*stackb;
 	int		sizea;
 	int		sizeb;
+	int		pi;
+	int		ori;
+	int		median;
+	int		racount;
+	int		rbcount;
 }	t_array;
 
 int		ft_strcmp(char *s1, char *s2);
