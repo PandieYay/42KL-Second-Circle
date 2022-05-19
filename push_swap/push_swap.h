@@ -30,9 +30,9 @@ typedef struct s_array {
 
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi(const char *str);
+int		checkarg(char **argv);
 char	ft_atoichecker(const char *str);
 char	**ft_split(char const *s, char c);
-int		checkarg(char **argv);
 void	sa(t_array *array);
 void	sb(t_array *array);
 void	ss(t_array *array);
@@ -51,5 +51,7 @@ void	partitionisthree(t_array *array, int len);
 void	partitionisthreeb(t_array *array, int len);
 int		findmedian(int *arr, int n);
 int		bubblesort(int *arr, t_array *array);
+int		sortmedian(t_array *array);
+int		sortmedianb(t_array *array);
 
 #endif

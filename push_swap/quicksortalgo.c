@@ -20,8 +20,7 @@ static int	partition(t_array *array, int len)
 	array->racount = 0;
 	array->ori = array->sizea;
 	array->median = findmedian(array->stacka, len);
-	i = -1;
-	while (++i < len)
+	while (sortmedian(array) == 1)
 	{
 		if (array->stacka[0] < array->median)
 		{
@@ -49,8 +48,7 @@ static int	partitionb(t_array *array, int len)
 	array->rbcount = 0;
 	array->ori = array->sizeb;
 	array->median = findmedian(array->stackb, len);
-	i = -1;
-	while (++i < len)
+	while (sortmedianb(array) == 1)
 	{
 		if (array->stackb[0] >= array->median)
 		{
