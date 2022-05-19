@@ -17,7 +17,7 @@ static int	partition(t_array *array, int len)
 	int	i;
 
 	array->pi = 0;
-	array->racount = 0;
+	array->rcount = 0;
 	array->ori = array->sizea;
 	array->median = findmedian(array->stacka, len);
 	while (sortmedian(array) == 1)
@@ -30,12 +30,12 @@ static int	partition(t_array *array, int len)
 		else
 		{
 			ra(array);
-			array->racount++;
+			array->rcount++;
 		}
 	}
 	i = -1;
 	if (array->ori != len)
-		while (++i < array->racount)
+		while (++i < array->rcount)
 			rra(array);
 	return (array->pi);
 }
@@ -45,7 +45,7 @@ static int	partitionb(t_array *array, int len)
 	int	i;
 
 	array->pi = 0;
-	array->rbcount = 0;
+	array->rcount = 0;
 	array->ori = array->sizeb;
 	array->median = findmedian(array->stackb, len);
 	while (sortmedianb(array) == 1)
@@ -58,12 +58,12 @@ static int	partitionb(t_array *array, int len)
 		else
 		{
 			rb(array);
-			array->rbcount++;
+			array->rcount++;
 		}
 	}
 	i = -1;
 	if (array->ori != len)
-		while (++i < array->rbcount)
+		while (++i < array->rcount)
 			rrb(array);
 	return (array->pi);
 }
@@ -80,7 +80,12 @@ void	quicksortb(t_array *array, int len)
 		quicksortb(array, len);
 	}
 	else
-		partitionisthreeb(array, len);
+	{
+		if (array->sizeb < 3)
+			insertionsortb(array, len);
+		else
+			partitionisthreeb(array, len);
+	}
 }
 
 void	quicksort(t_array *array, int len)
@@ -96,7 +101,7 @@ void	quicksort(t_array *array, int len)
 	}
 	else
 	{
-		if (len == array->sizea)
+		if (array->sizea < 3)
 			insertionsort(array, len);
 		else
 			partitionisthree(array, len);

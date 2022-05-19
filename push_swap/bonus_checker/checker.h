@@ -21,8 +21,6 @@ typedef struct s_array {
 	int		*stackb;
 	int		sizea;
 	int		sizeb;
-	int		racount;
-	int		rbcount;
 }	t_array;
 
 int		ft_strncmp(char *s1, char *s2, size_t n);

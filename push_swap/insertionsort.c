@@ -12,25 +12,67 @@
 
 #include "push_swap.h"
 
-void	insertionsort(t_array *array, int n)
+void	insertionsort(t_array *array, int len)
 {
-	int	i;
-	int	k;
-
-	i = 1;
-	while (i < n)
+	if (len == 2)
 	{
-		k = i - 1;
-		while (k >= 0 && array->stacka[k] > array->stacka[i])
-		{
-			if (array->stacka[0] > array->stacka[1])
-				sa(array);
-			else
-				rra(array);
-			k = k - 1;
-		}
 		if (array->stacka[0] > array->stacka[1])
 			sa(array);
-		i++;
+	}
+	else if (array->stacka[0] > array->stacka[1]
+		&& array->stacka[0] > array->stacka[2])
+	{
+		ra(array);
+		if (array->stacka[0] > array->stacka[1])
+			sa(array);
+	}
+	else if (array->stacka[1] > array->stacka[0]
+		&& array->stacka[1] > array->stacka[2])
+	{
+		rra(array);
+		if (array->stacka[0] > array->stacka[1])
+			sa(array);
+	}
+	else if (array->stacka[2] > array->stacka[0]
+		&& array->stacka[2] > array->stacka[1])
+		if (array->stacka[0] > array->stacka[1])
+			sa(array);
+}
+
+static void	insertionsortbhelper(t_array *array, int option)
+{
+	if (option == 0)
+	{
+		pa(array);
+		pa(array);
+		pa(array);
+	}
+	else if (option == 1)
+	{
+		pa(array);
+		sb(array);
+		pa(array);
+		pa(array);
+	}
+}
+
+void	insertionsortb(t_array *array, int len)
+{
+	if (len == 1 || len == 2)
+		partitionisthreeb(array, len);
+	else if (array->stacka[0] > array->stacka[1]
+		&& array->stacka[0] > array->stacka[2])
+		partitionisthreeb(array, len);
+	else if (array->stackb[1] > array->stackb[0]
+		&& array->stackb[1] > array->stackb[2])
+		partitionisthreeb(array, len);
+	else if (array->stackb[2] > array->stackb[0]
+		&& array->stackb[2] > array->stackb[1])
+	{
+		rrb(array);
+		if (array->stackb[0] > array->stackb[1])
+			insertionsortbhelper(array, 0);
+		else
+			insertionsortbhelper(array, 1);
 	}
 }

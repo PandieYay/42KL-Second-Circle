@@ -24,8 +24,7 @@ typedef struct s_array {
 	int		pi;
 	int		ori;
 	int		median;
-	int		racount;
-	int		rbcount;
+	int		rcount;
 }	t_array;
 
 int		ft_strcmp(char *s1, char *s2);
@@ -46,7 +45,8 @@ void	rrb(t_array *array);
 void	rrr(t_array *array);
 void	quicksort(t_array *array, int len);
 void	quicksortb(t_array *array, int len);
-void	insertionsort(t_array *array, int n);
+void	insertionsort(t_array *array, int len);
+void	insertionsortb(t_array *array, int len);
 void	partitionisthree(t_array *array, int len);
 void	partitionisthreeb(t_array *array, int len);
 int		findmedian(int *arr, int n);
