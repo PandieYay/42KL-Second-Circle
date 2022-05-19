@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edlim <edlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:14:45 by edlim             #+#    #+#             */
-/*   Updated: 2022/05/09 11:14:46 by edlim            ###   ########.fr       */
+/*   Updated: 2022/05/19 10:48:47 by edlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -21,14 +21,11 @@ typedef struct s_array {
 	int		*stackb;
 	int		sizea;
 	int		sizeb;
-	int		pi;
-	int		ori;
-	int		median;
 	int		racount;
 	int		rbcount;
 }	t_array;
 
-int		ft_strcmp(char *s1, char *s2);
+int		ft_strncmp(char *s1, char *s2, size_t n);
 int		ft_atoi(const char *str);
 char	ft_atoichecker(const char *str);
 char	**ft_split(char const *s, char c);
@@ -44,12 +41,7 @@ void	rr(t_array *array);
 void	rra(t_array *array);
 void	rrb(t_array *array);
 void	rrr(t_array *array);
-void	quicksort(t_array *array, int len);
-void	quicksortb(t_array *array, int len);
-void	insertionsort(t_array *array, int n);
-void	partitionisthree(t_array *array, int len);
-void	partitionisthreeb(t_array *array, int len);
-int		findmedian(int *arr, int n);
 int		bubblesort(int *arr, t_array *array);
+char	*get_next_line(int fd);
 
 #endif
