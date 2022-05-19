@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "checker.h"
-#include <stdio.h>
 
 static void	fillstacks(char **argv, t_array *array)
 {
