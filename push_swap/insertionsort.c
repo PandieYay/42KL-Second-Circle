@@ -60,8 +60,8 @@ void	insertionsortb(t_array *array, int len)
 {
 	if (len == 1 || len == 2)
 		partitionisthreeb(array, len);
-	else if (array->stacka[0] > array->stacka[1]
-		&& array->stacka[0] > array->stacka[2])
+	else if (array->stackb[0] > array->stackb[1]
+		&& array->stackb[0] > array->stackb[2])
 		partitionisthreeb(array, len);
 	else if (array->stackb[1] > array->stackb[0]
 		&& array->stackb[1] > array->stackb[2])
