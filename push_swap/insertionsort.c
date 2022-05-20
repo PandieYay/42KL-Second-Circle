@@ -70,7 +70,7 @@ void	insertionsortb(t_array *array, int len)
 		&& array->stackb[2] > array->stackb[1])
 	{
 		rrb(array);
-		if (array->stackb[0] > array->stackb[1])
+		if (array->stackb[1] > array->stackb[2])
 			insertionsortbhelper(array, 0);
 		else
 			insertionsortbhelper(array, 1);

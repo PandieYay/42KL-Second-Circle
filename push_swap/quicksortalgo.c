@@ -81,7 +81,7 @@ void	quicksortb(t_array *array, int len)
 	}
 	else
 	{
-		if (array->sizeb < 3)
+		if (array->sizeb <= 3)
 			insertionsortb(array, len);
 		else
 			partitionisthreeb(array, len);
@@ -101,7 +101,7 @@ void	quicksort(t_array *array, int len)
 	}
 	else
 	{
-		if (array->sizea < 3)
+		if (array->sizea <= 3)
 			insertionsort(array, len);
 		else
 			partitionisthree(array, len);
