@@ -101,7 +101,7 @@ int	main(int argc, char **argv)
 		write (1, "Error\n", 6);
 		return (-1);
 	}
-	if (bubblesort(array.stacka, &array) == 1)
+	if (bubblesort(array.stacka, &array) == 1 && array.sizeb == 0)
 	{
 		write (1, "OK\n", 3);
 		return (0);
